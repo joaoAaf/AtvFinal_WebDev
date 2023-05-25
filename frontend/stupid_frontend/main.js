@@ -21,6 +21,40 @@ function axiosDelete(id) {
         .catch(error => console.log(error))
 }
 
+function axiosCancel(id) {
+    axios.get(`${users}/${id}`)
+        .then(response => {
+            const user = response.data
+            cancel(user, id)
+        })
+        .catch(error => console.log(error))
+}
+
+function axiosUpdate(id, user) {
+    if (user == null) {
+        axiosCancel(id)
+    }
+    else {
+        axios.get(`${users}/${id}`)
+            .then(response => {
+                const userOld = response.data
+                if (user.name == '') {
+                    user.name = userOld.name
+                }
+                if (user.email == '') {
+                    user.email = userOld.email
+                }
+                axios.put(`${users}/${id}`, user)
+                    .then(response => {
+                        alert("Usuário Atualizado!")
+                        axiosCancel(id)
+                    })
+                    .catch(error => console.log(error))
+            })
+            .catch(error => console.log(error))
+    }
+}
+
 function deleteUser(id) {
     const tbody = document.getElementById('tableUsers')
     const tr = document.getElementById(id)
@@ -30,10 +64,10 @@ function deleteUser(id) {
 function updateUserInit(id) {
     const tr = document.getElementById(id)
     let td = document.getElementById(id + "0")
-    td.appendChild(addInput("text", "Nome"))
+    td.appendChild(addInput("text", "Nome", id + "i0"))
 
     td = document.getElementById(id + "1")
-    td.appendChild(addInput("email", "exemplo@email.com"))
+    td.appendChild(addInput("email", "exemplo@email.com", id + "i1"))
 
     td = document.getElementById(id + "2")
     tr.removeChild(td)
@@ -47,13 +81,24 @@ function updateUserInit(id) {
     tr.appendChild(td)
 }
 
-function axiosCancel(id) {
-    axios.get(`${users}/${id}`)
-        .then(response => {
-            const user = response.data
-            cancel(user, id)
-        })
-        .catch(error => console.log(error))
+function updateUserDone(id) {
+    let user
+    let name
+    let email
+    let input = document.getElementById(id + "i0")
+    name = input.value
+    input = document.getElementById(id + "i1")
+    email = input.value
+    if (name == '' && email == '') {
+        user = null
+    }
+    else {
+        user = {
+            name: name,
+            email: email
+        }
+    }
+    return user
 }
 
 function cancel(user, id) {
@@ -129,8 +174,9 @@ function addButton(nome, num, id) {
     return button
 }
 
-function addInput(type, placeHolder) {
+function addInput(type, placeHolder, id) {
     const input = document.createElement('input')
+    input.id = id
     input.type = type
     input.className = "form-control"
     input.placeholder = placeHolder
@@ -146,7 +192,7 @@ function click(num, id) {
         updateUserInit(id)
     }
     else if (num == 2) {
-        alert("Deu certo! /o/")
+        axiosUpdate(id, updateUserDone(id))
     }
     else if (num == 3) {
         axiosCancel(id)

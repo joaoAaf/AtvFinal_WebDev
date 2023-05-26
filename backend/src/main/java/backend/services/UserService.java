@@ -42,6 +42,8 @@ public class UserService {
 	
 	private void updateData(User newUser, User user) {
 		newUser.setName(user.getName());
-		newUser.setEmail(user.getEmail());	
+		newUser.setEmail(user.getEmail());
+		newUser.setTelefone(user.getTelefone());
+		newUser.setSituacao(user.getSituacao());
 	}
 }

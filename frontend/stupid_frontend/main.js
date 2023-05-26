@@ -154,6 +154,27 @@ function getUsers(data) {
 
         td = document.createElement('td')
         td.id = user.id + "2"
+        td.innerHTML = user.telefone
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.id = user.id + "3"
+        if (user.situacao == true) {
+            let strong = document.createElement('strong')
+            strong.style = "color: darkolivegreen;font-size: larger;"
+            strong.innerHTML = "Ativo"
+            td.appendChild(strong)
+        }
+        else {
+            let strong = document.createElement('strong')
+            strong.style = "color: crimson;font-size: larger;"
+            strong.innerHTML = "Inativo"
+            td.appendChild(strong)
+        }
+        tr.appendChild(td)
+
+        td = document.createElement('td')
+        td.id = user.id + "4"
         let div = document.createElement('div')
         div.className = "d-grid gap-2 col-6"
         div.appendChild(addButton("Remover", 0, user.id))
@@ -198,4 +219,3 @@ function click(num, id) {
         axiosCancel(id)
     }
 }
-

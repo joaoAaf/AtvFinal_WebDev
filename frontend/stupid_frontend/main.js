@@ -121,6 +121,15 @@ function updateUserDone(id) {
     return user
 }
 
+function vazio (data, user, userOld) {
+    if (data == '') {
+        return userOld.data
+    }
+    else {
+        return user.data
+    }
+}
+
 function cancel(user, id) {
     const tr = document.getElementById(id)
     let td = document.getElementById(id + "0")

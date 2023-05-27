@@ -57,15 +57,21 @@ function axiosRegister() {
             })
             .catch(error => console.log(error))
     }
+    else {
+        alert("Preencha todos os campos!")
+    }
 }
 
 function register() {
     let input = document.getElementById('registername')
     let name = input.value
+    input.value = ''
     input = document.getElementById('registeremail')
     let email = input.value
+    input.value = ''
     input = document.getElementById('registertel')
     let tel = input.value
+    input.value = ''
     if (name == '' || email == '' || tel == '') {
         return null
     }

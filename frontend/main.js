@@ -1,7 +1,5 @@
 const users = "http://localhost:8080/users"
 
-axiosGet(users)
-
 function axiosGet() {
     axios.get(users)
         .then(response => {
@@ -49,6 +47,18 @@ function axiosUpdate(id, user) {
 
 }
 
+function axiosRegister() {
+    const user = register()
+    if (user != null) {
+        axios.post(users, user)
+            .then(response => {
+                const userNew = response.data
+                window.location.href = "gestao.html"
+            })
+            .catch(error => console.log(error))
+    }
+}
+
 function register() {
     let input = document.getElementById('registername')
     let name = input.value
@@ -56,12 +66,18 @@ function register() {
     let email = input.value
     input = document.getElementById('registertel')
     let tel = input.value
-    let user = {
-        name: name,
-        email: email,
-        tel: tel
+    if (name == '' || email == '' || tel == '') {
+        return null
     }
-    return user
+    else {
+        let user = {
+            name: name,
+            email: email,
+            tel: tel,
+            status: true
+        }
+        return user
+    }
 }
 
 function deleteUser(id) {
@@ -112,21 +128,14 @@ function updateUserInit(id) {
 }
 
 function updateUserDone(id) {
-    let user
-    let name
-    let email
-    let tel
-    let status
     let input = document.getElementById(id + "i0")
-    name = input.value
+    let name = input.value
     input = document.getElementById(id + "i1")
-    email = input.value
+    let email = input.value
     input = document.getElementById(id + "i2")
-    tel = input.value
+    let tel = input.value
     let select = document.getElementById(id + "i3")
-    status = select.selectedIndex
-    console.log(status)
-
+    let status = select.selectedIndex
     if (status == '1') {
         status = true
     }
@@ -136,17 +145,12 @@ function updateUserDone(id) {
     else {
         status = ''
     }
-
-    console.log(status)
-
-
-    user = {
+    let user = {
         name: name,
         email: email,
         tel: tel,
         status: status
     }
-    console.log(user)
     return user
 }
 

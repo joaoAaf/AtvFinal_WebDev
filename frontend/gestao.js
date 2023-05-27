@@ -31,28 +31,22 @@ function axiosCancel(id) {
 }
 
 function axiosUpdate(id, user) {
-    if (user == null) {
-        axiosCancel(id)
-    }
-    else {
-        axios.get(`${users}/${id}`)
-            .then(response => {
-                const userOld = response.data
-                if (user.name == '') {
-                    user.name = userOld.name
-                }
-                if (user.email == '') {
-                    user.email = userOld.email
-                }
-                axios.put(`${users}/${id}`, user)
-                    .then(response => {
-                        alert("Usuário Atualizado!")
-                        axiosCancel(id)
-                    })
-                    .catch(error => console.log(error))
-            })
-            .catch(error => console.log(error))
-    }
+    axios.get(`${users}/${id}`)
+        .then(response => {
+            const userOld = response.data
+            user.name = empty(user.name, userOld.name)
+            user.email = empty(user.email, userOld.email)
+            user.tel = empty(user.tel, userOld.tel)
+            user.status = empty(user.status, userOld.status)
+            axios.put(`${users}/${id}`, user)
+                .then(response => {
+                    alert("Usuário Atualizado!")
+                    axiosCancel(id)
+                })
+                .catch(error => console.log(error))
+        })
+        .catch(error => console.log(error))
+
 }
 
 function deleteUser(id) {
@@ -64,25 +58,26 @@ function deleteUser(id) {
 function updateUserInit(id) {
     const tr = document.getElementById(id)
     let td = document.getElementById(id + "0")
-    td.appendChild(addInput("text", "Nome", id + "i0"))
+    td.appendChild(addInput("text", "Digite um nome", id + "i0"))
 
     td = document.getElementById(id + "1")
-    td.appendChild(addInput("email", "exemplo@email.com", id + "i1"))
+    td.appendChild(addInput("email", "Digite um email", id + "i1"))
 
     td = document.getElementById(id + "2")
-    td.appendChild(addInput("tel", "99999999999", id + "i2"))
-    
+    td.appendChild(addInput("tel", "Digite um telefone", id + "i2"))
+
     td = document.getElementById(id + "3")
     let select = document.createElement('select')
+    select.id = id + "i3"
     select.className = "form-select"
     let option1 = document.createElement('option')
-    option1.selected = ""
+    option1.selected = ''
     option1.innerHTML = "Selecione a situação do usuário"
     let option2 = document.createElement('option')
-    option2.value = "1"
+    option2.value = '1'
     option2.innerHTML = "Ativo"
     let option3 = document.createElement('option')
-    option3.value = "2"
+    option3.value = '2'
     option3.innerHTML = "Inativo"
     select.appendChild(option1)
     select.appendChild(option2)
@@ -105,28 +100,47 @@ function updateUserDone(id) {
     let user
     let name
     let email
+    let tel
+    let status
     let input = document.getElementById(id + "i0")
     name = input.value
     input = document.getElementById(id + "i1")
     email = input.value
-    if (name == '' && email == '') {
-        user = null
+    input = document.getElementById(id + "i2")
+    tel = input.value
+    let select = document.getElementById(id + "i3")
+    status = select.selectedIndex
+    console.log(status)
+
+    if (status == '1') {
+        status = true
+    }
+    else if (status == '2') {
+        status = false
     }
     else {
-        user = {
-            name: name,
-            email: email
-        }
+        status = ''
     }
+
+    console.log(status)
+
+
+    user = {
+        name: name,
+        email: email,
+        tel: tel,
+        status: status
+    }
+    console.log(user)
     return user
 }
 
-function vazio (data, user, userOld) {
-    if (data == '') {
-        return userOld.data
+function empty(userData, userOldData) {
+    if (userData === '') {
+        return userOldData
     }
     else {
-        return user.data
+        return userData
     }
 }
 
@@ -155,12 +169,12 @@ function cancel(user, id) {
 
     td = document.createElement('td')
     td.id = user.id + "2"
-    td.innerHTML = user.telefone
+    td.innerHTML = user.tel
     tr.appendChild(td)
 
     td = document.createElement('td')
     td.id = user.id + "3"
-    if (user.situacao == true) {
+    if (user.status == true) {
         let strong = document.createElement('strong')
         strong.style = "color: darkolivegreen;font-size: larger;"
         strong.innerHTML = "Ativo"
@@ -208,12 +222,12 @@ function getUsers(data) {
 
         td = document.createElement('td')
         td.id = user.id + "2"
-        td.innerHTML = user.telefone
+        td.innerHTML = user.tel
         tr.appendChild(td)
 
         td = document.createElement('td')
         td.id = user.id + "3"
-        if (user.situacao == true) {
+        if (user.status == true) {
             let strong = document.createElement('strong')
             strong.style = "color: darkolivegreen;font-size: larger;"
             strong.innerHTML = "Ativo"

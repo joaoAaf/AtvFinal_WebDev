@@ -49,6 +49,21 @@ function axiosUpdate(id, user) {
 
 }
 
+function register() {
+    let input = document.getElementById('registername')
+    let name = input.value
+    input = document.getElementById('registeremail')
+    let email = input.value
+    input = document.getElementById('registertel')
+    let tel = input.value
+    let user = {
+        name: name,
+        email: email,
+        tel: tel
+    }
+    return user
+}
+
 function deleteUser(id) {
     const tbody = document.getElementById('tableUsers')
     const tr = document.getElementById(id)

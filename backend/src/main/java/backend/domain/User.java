@@ -14,19 +14,19 @@ public class User implements Serializable {
 	private String id;
 	private String name;
 	private String email;
-	private String telefone;
-	private Boolean situacao;
+	private String tel;
+	private Boolean status;
 	
 	public User () {
 	}
 
-	public User(String id, String name, String email, String telefone, Boolean situacao) {
+	public User(String id, String name, String email, String tel, Boolean status) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
-		this.telefone = telefone;
-		this.situacao = situacao;
+		this.tel = tel;
+		this.status = status;
 	}
 
 	public String getId() {
@@ -53,20 +53,20 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Boolean getSituacao() {
-		return situacao;
+	public Boolean getStatus() {
+		return status;
 	}
 
-	public void setSituacao(Boolean situacao) {
-		this.situacao = situacao;
+	public void setStatus(Boolean status) {
+		this.status = status;
 	}
 
-	public String getTelefone() {
-		return telefone;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 	
 	@Override

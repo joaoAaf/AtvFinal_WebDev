@@ -17,9 +17,6 @@ public class Instantiation implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepo;
 	
-	/*@Autowired
-	private PostRepository postRepo;*/
-	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -27,7 +24,6 @@ public class Instantiation implements CommandLineRunner {
 		fDate.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		userRepo.deleteAll();
-		//postRepo.deleteAll();
 		
 		User maria = new User(null, "Maria Brown", "maria@gmail.com","85986534700",true);
 		User alex = new User(null, "Alex Green", "alex@gmail.com","85996244105",true);

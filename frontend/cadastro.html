@@ -11,6 +11,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="main.js"></script>
 </head>
 <body>
      
@@ -44,7 +46,7 @@
                 </label>
               </div>
             <!-- Botão de cadastro -->
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button onclick="axiosRegister()" type="button" class="btn btn-primary">Cadastrar</button>
             <p class="mt-5 mb-3 text-muted text-center">Autores: Aesley Soares, João Anderson, Eduardo Borges &copy; 2023</p>
         </form>
         </div>

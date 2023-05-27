@@ -70,9 +70,29 @@ function updateUserInit(id) {
     td.appendChild(addInput("email", "exemplo@email.com", id + "i1"))
 
     td = document.getElementById(id + "2")
+    td.appendChild(addInput("tel", "99999999999", id + "i2"))
+    
+    td = document.getElementById(id + "3")
+    let select = document.createElement('select')
+    select.className = "form-select"
+    let option1 = document.createElement('option')
+    option1.selected = ""
+    option1.innerHTML = "Selecione a situação do usuário"
+    let option2 = document.createElement('option')
+    option2.value = "1"
+    option2.innerHTML = "Ativo"
+    let option3 = document.createElement('option')
+    option3.value = "2"
+    option3.innerHTML = "Inativo"
+    select.appendChild(option1)
+    select.appendChild(option2)
+    select.appendChild(option3)
+    td.appendChild(select)
+
+    td = document.getElementById(id + "4")
     tr.removeChild(td)
     td = document.createElement('td')
-    td.id = id + "2"
+    td.id = id + "4"
     let div = document.createElement('div')
     div.className = "d-grid gap-2 col-6"
     div.appendChild(addButton("Aplicar", 2, id))
@@ -109,6 +129,10 @@ function cancel(user, id) {
     tr.removeChild(td)
     td = document.getElementById(id + "2")
     tr.removeChild(td)
+    td = document.getElementById(id + "3")
+    tr.removeChild(td)
+    td = document.getElementById(id + "4")
+    tr.removeChild(td)
 
     td = document.createElement('td')
     td.id = user.id + "0"
@@ -122,6 +146,27 @@ function cancel(user, id) {
 
     td = document.createElement('td')
     td.id = user.id + "2"
+    td.innerHTML = user.telefone
+    tr.appendChild(td)
+
+    td = document.createElement('td')
+    td.id = user.id + "3"
+    if (user.situacao == true) {
+        let strong = document.createElement('strong')
+        strong.style = "color: darkolivegreen;font-size: larger;"
+        strong.innerHTML = "Ativo"
+        td.appendChild(strong)
+    }
+    else {
+        let strong = document.createElement('strong')
+        strong.style = "color: crimson;font-size: larger;"
+        strong.innerHTML = "Inativo"
+        td.appendChild(strong)
+    }
+    tr.appendChild(td)
+
+    td = document.createElement('td')
+    td.id = user.id + "4"
     let div = document.createElement('div')
     div.className = "d-grid gap-2 col-6"
     div.appendChild(addButton("Remover", 0, user.id))

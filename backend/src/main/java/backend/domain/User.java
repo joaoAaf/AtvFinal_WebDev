@@ -29,15 +29,6 @@ public class User implements Serializable {
 		this.status = true;
 	}
 
-	public User(String id, String name, String email, String tel, Boolean status) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.email = email;
-		this.tel = tel;
-		this.status = status;
-	}
-
 	public String getId() {
 		return id;
 	}

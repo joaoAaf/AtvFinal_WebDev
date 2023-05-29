@@ -62,6 +62,26 @@ function axiosRegister() {
     }
 }
 
+function login() {
+    let input = document.getElementById('loginusername')
+    let login = input.value
+    input.value = ''
+    input = document.getElementById('loginpassword')
+    let pass = input.value
+    input.value = ''
+    if (login == '' || pass == '') {
+        return null
+    }
+    else {
+        let adminLogin = {
+            login: login,
+            pass: pass
+        }
+        console.log(adminLogin)
+        return adminLogin
+    }
+}
+
 function register() {
     let input = document.getElementById('registername')
     let name = input.value

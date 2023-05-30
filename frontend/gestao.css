@@ -1,5 +1,6 @@
 /* Estilos para a tabela */
 .table {
+    border-radius: 15px;
     width: 100%;
     margin-bottom: 1rem;
     color: #212529;
@@ -10,16 +11,16 @@
   .table td {
     padding: 0.75rem;
     vertical-align: top;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid linear-gradient(90deg, #002F52 35%, #326589);
   }
   
   .table thead th {
     vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+    border-bottom: 2px solid linear-gradient(90deg, #002F52 35%, #326589);
   }
   
   .table tbody + tbody {
-    border-top: 2px solid #dee2e6;
+    border-top: 2px solid linear-gradient(90deg, #002F52 35%, #326589);
   }
   
   .table-sm th,
@@ -74,7 +75,7 @@
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: -ms-autohiding-scrollbar;
   }
-  
+
   /* Estilos para as bordas inferiores */
   .border-bottom {
     border-bottom: 1px solid #dee2e6;
@@ -111,12 +112,12 @@
   }
 
   .small-table {
-    width: 50%;
+    width: 75%;
   }
   .d-flex.justify-content-center {
     align-items: center;
     min-height: 100vh;
   }
   body {
-    background-color:#002F52 ; /* Substitua pela cor desejada */
+    background-image: linear-gradient(90deg, #002F52 35%, #326589); /* Substitua pela cor desejada */
   }     

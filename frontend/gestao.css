@@ -1,0 +1,122 @@
+/* Estilos para a tabela */
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: #fff;
+}
+  
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  .table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+  }
+  
+  .table-sm th,
+  .table-sm td {
+    padding: 0.3rem;
+  }
+  
+  /* Estilos para os botões */
+  .btn-primary {
+    color: #0c0c0c;
+    background-color: #eceff1;
+    border-color: #007bff;
+  }
+  
+  .btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .btn-primary:focus,
+  .btn-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  }
+  
+  .btn-primary.disabled,
+  .btn-primary:disabled {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  /* Estilos para o cabeçalho */
+  .h2 {
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: whitesmoke;
+  }
+  
+  /* Estilos para a barra de ferramentas */
+  .btn-toolbar {
+    margin-bottom: 1rem;
+  }
+  
+  /* Estilos para o contêiner da tabela responsiva */
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+  
+  /* Estilos para as bordas inferiores */
+  .border-bottom {
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Estilos para o espaçamento superior e inferior */
+  .pt-3,
+  .pb-2,
+  .mb-3 {
+    padding-top: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Estilos para envolver itens e alinhá-los */
+  .d-flex {
+    display: flex !important;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between !important;
+  }
+  
+  .flex-wrap {
+    flex-wrap: wrap !important;
+  }
+  
+  .flex-md-nowrap {
+    flex-wrap: nowrap !important;
+  }
+  
+  .align-items-center {
+    align-items: center !important;
+  }
+
+  .small-table {
+    width: 50%;
+  }
+  .d-flex.justify-content-center {
+    align-items: center;
+    min-height: 100vh;
+  }
+  body {
+    background-color:#002F52 ; /* Substitua pela cor desejada */
+  }     

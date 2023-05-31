@@ -35,11 +35,7 @@ async function axiosDelete(id) {
             Authorization: token
         }
     })
-<<<<<<< HEAD
-        .then(response => {
-=======
         .then(() => {
->>>>>>> 69084ff (nova confuguração para o cors)
             alert("Usuário Excluído")
             deleteUser(id)
         }
@@ -83,11 +79,7 @@ async function axiosUpdate(id, user) {
                     Authorization: token
                 }
             })
-<<<<<<< HEAD
-                .then(response => {
-=======
                 .then(() => {
->>>>>>> 69084ff (nova confuguração para o cors)
                     alert("Usuário Atualizado!")
                     axiosCancel(id)
                 })

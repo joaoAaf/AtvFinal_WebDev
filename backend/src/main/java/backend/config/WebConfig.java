@@ -15,12 +15,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
-<<<<<<< HEAD
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-=======
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
->>>>>>> 69084ff (nova confuguração para o cors)
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,28 +24,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 @EnableWebSecurity
 public class WebConfig implements WebMvcConfigurer {
-<<<<<<< HEAD
-	 
-    	@Autowired
-    	private FilterToken filter;
-	
-		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/**");
-	    }
-	    
-		@Bean
-	    public SecurityFilterChain sfc (HttpSecurity httpSec) throws Exception {
-	    	return httpSec.cors(request -> new CorsConfiguration().applyPermitDefaultValues())
-	    			.csrf((csrf) -> csrf.disable())
-	    			.sessionManagement((sessionManagement) ->
-	 					sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	    			.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
- 						.requestMatchers("*","/login").permitAll().anyRequest().authenticated())
-	    			.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
-	    			.build();
-		}
-=======
->>>>>>> 69084ff (nova confuguração para o cors)
 
 	@Autowired
 	private FilterToken filter;

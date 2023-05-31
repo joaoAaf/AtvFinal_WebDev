@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^1.4.0",
+    "axios-jwt": "^3.0.2",
     "bootstrap": "^5.2.3"
   },
-  "devDependencies": {},
   "description": ""
 }

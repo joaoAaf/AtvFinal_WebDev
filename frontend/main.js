@@ -1,61 +1,115 @@
 const users = "http://localhost:8080/users"
+const loginUrl = "http://localhost:8080/login"
+let token
 
-function axiosGet() {
-    axios.get(users)
+async function getToken(admLogin) {
+    await axios.post(loginUrl, admLogin)
+      .then(response =>{
+        token = response.data.token
+        window.location.href = "gestao.html"
+      })
+      .catch(error => {
+        console.log(error)
+    })
+  }
+
+async function axiosGet() {
+    axios.get(users, {
+        headers: {
+            Authorization: token
+        }
+    })
         .then(response => {
             const data = response.data
             getUsers(data)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            window.location.href = "login.html"
+            console.log(error)
+        })
 }
 
-function axiosDelete(id) {
-    axios.delete(`${users}/${id}`)
+async function axiosDelete(id) {
+    axios.delete(`${users}/${id}`, {
+        headers: {
+            Authorization: token
+        }
+    })
         .then(response => {
             alert("Usuário Excluído")
             deleteUser(id)
         }
         )
-        .catch(error => console.log(error))
+        .catch(error => {
+            //window.location.href = "login.html"
+            console.log(error)
+        })
 }
 
-function axiosCancel(id) {
-    axios.get(`${users}/${id}`)
+async function axiosCancel(id) {
+    axios.get(`${users}/${id}`, {
+        headers: {
+            Authorization: token
+        }
+    })
         .then(response => {
             const user = response.data
             cancel(user, id)
         })
-        .catch(error => console.log(error))
+        .catch(error => {
+            //window.location.href = "login.html"
+            console.log(error)
+        })
 }
 
-function axiosUpdate(id, user) {
-    axios.get(`${users}/${id}`)
+async function axiosUpdate(id, user) {
+    axios.get(`${users}/${id}`, {
+        headers: {
+            Authorization: token
+        }
+    })
         .then(response => {
             const userOld = response.data
             user.name = empty(user.name, userOld.name)
             user.email = empty(user.email, userOld.email)
             user.tel = empty(user.tel, userOld.tel)
             user.status = empty(user.status, userOld.status)
-            axios.put(`${users}/${id}`, user)
+            axios.put(`${users}/${id}`, user, {
+                headers: {
+                    Authorization: token
+                }
+            })
                 .then(response => {
                     alert("Usuário Atualizado!")
                     axiosCancel(id)
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    //window.location.href = "login.html"
+                    console.log(error)
+                })
         })
-        .catch(error => console.log(error))
-
+        .catch(error => {
+            //window.location.href = "login.html"
+            console.log(error)
+        })
 }
 
-function axiosRegister() {
+async function axiosRegister() {
     const user = register()
     if (user != null) {
-        axios.post(users, user)
+        axios.post(users, user, {
+            headers: {
+                Authorization: token
+            }
+        })
             .then(response => {
                 const userNew = response.data
                 window.location.href = "gestao.html"
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                window.location.href = "login.html"
+                console.log(error)
+            })
     }
     else {
         alert("Preencha todos os campos!")
@@ -73,12 +127,11 @@ function login() {
         return null
     }
     else {
-        let adminLogin = {
+        let admLogin = {
             login: login,
             pass: pass
         }
-        console.log(adminLogin)
-        return adminLogin
+        getToken(admLogin)
     }
 }
 

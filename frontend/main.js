@@ -35,7 +35,7 @@ async function axiosDelete(id) {
             Authorization: token
         }
     })
-        .then(response => {
+        .then(() => {
             alert("Usuário Excluído")
             deleteUser(id)
         }
@@ -79,7 +79,7 @@ async function axiosUpdate(id, user) {
                     Authorization: token
                 }
             })
-                .then(response => {
+                .then(() => {
                     alert("Usuário Atualizado!")
                     axiosCancel(id)
                 })

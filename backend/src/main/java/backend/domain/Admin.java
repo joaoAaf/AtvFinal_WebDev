@@ -1,6 +1,5 @@
 package backend.domain;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Document(collection = "admin")
-public class Admin implements Serializable, UserDetails {
+public class Admin implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
 	@Id

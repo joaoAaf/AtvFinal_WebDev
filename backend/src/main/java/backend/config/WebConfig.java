@@ -35,9 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
 				.sessionManagement(
 						(sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests((authorizeHttpRequests) -> authorizeHttpRequests
-						.requestMatchers("*", "/login").permitAll()
-						.requestMatchers("*", "/users").authenticated()
-						.requestMatchers("*", "/users/**").permitAll().anyRequest().authenticated())
+						.requestMatchers("POST", "/login").permitAll().anyRequest().authenticated())
 				.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}

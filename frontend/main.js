@@ -1,11 +1,11 @@
 const users = "http://localhost:8080/users"
 const loginUrl = "http://localhost:8080/login"
-let token
 
 async function getToken(admLogin) {
     await axios.post(loginUrl, admLogin)
       .then(response =>{
-        token = response.data.token
+        const token = response.data
+        sessionStorage.setItem('token',token)
         window.location.href = "gestao.html"
       })
       .catch(error => {
@@ -16,7 +16,7 @@ async function getToken(admLogin) {
 async function axiosGet() {
     axios.get(users, {
         headers: {
-            Authorization: token
+            Authorization: sessionStorage.getItem('token')
         }
     })
         .then(response => {
@@ -24,6 +24,7 @@ async function axiosGet() {
             getUsers(data)
         })
         .catch(error => {
+            alert("Token expirado, faça login novamente.")
             window.location.href = "login.html"
             console.log(error)
         })
@@ -32,7 +33,7 @@ async function axiosGet() {
 async function axiosDelete(id) {
     axios.delete(`${users}/${id}`, {
         headers: {
-            Authorization: token
+            Authorization: sessionStorage.getItem('token')
         }
     })
         .then(() => {
@@ -41,7 +42,8 @@ async function axiosDelete(id) {
         }
         )
         .catch(error => {
-            //window.location.href = "login.html"
+            alert("Token expirado, faça login novamente.")
+            window.location.href = "login.html"
             console.log(error)
         })
 }
@@ -49,7 +51,7 @@ async function axiosDelete(id) {
 async function axiosCancel(id) {
     axios.get(`${users}/${id}`, {
         headers: {
-            Authorization: token
+            Authorization: sessionStorage.getItem('token')
         }
     })
         .then(response => {
@@ -57,7 +59,8 @@ async function axiosCancel(id) {
             cancel(user, id)
         })
         .catch(error => {
-            //window.location.href = "login.html"
+            alert("Token expirado, faça login novamente.")
+            window.location.href = "login.html"
             console.log(error)
         })
 }
@@ -65,7 +68,7 @@ async function axiosCancel(id) {
 async function axiosUpdate(id, user) {
     axios.get(`${users}/${id}`, {
         headers: {
-            Authorization: token
+            Authorization: sessionStorage.getItem('token')
         }
     })
         .then(response => {
@@ -76,7 +79,7 @@ async function axiosUpdate(id, user) {
             user.status = empty(user.status, userOld.status)
             axios.put(`${users}/${id}`, user, {
                 headers: {
-                    Authorization: token
+                    Authorization: sessionStorage.getItem('token')
                 }
             })
                 .then(() => {
@@ -84,12 +87,14 @@ async function axiosUpdate(id, user) {
                     axiosCancel(id)
                 })
                 .catch(error => {
-                    //window.location.href = "login.html"
+                    alert("Token expirado, faça login novamente.")
+                    window.location.href = "login.html"
                     console.log(error)
                 })
         })
         .catch(error => {
-            //window.location.href = "login.html"
+            alert("Token expirado, faça login novamente.")
+            window.location.href = "login.html"
             console.log(error)
         })
 }
@@ -99,7 +104,7 @@ async function axiosRegister() {
     if (user != null) {
         axios.post(users, user, {
             headers: {
-                Authorization: token
+                Authorization: sessionStorage.getItem('token')
             }
         })
             .then(response => {
@@ -107,6 +112,7 @@ async function axiosRegister() {
                 window.location.href = "gestao.html"
             })
             .catch(error => {
+                alert("Token expirado, faça login novamente.")
                 window.location.href = "login.html"
                 console.log(error)
             })
@@ -124,7 +130,7 @@ function login() {
     let pass = input.value
     input.value = ''
     if (login == '' || pass == '') {
-        return null
+        alert("Preencha todos os campos!")
     }
     else {
         let admLogin = {
@@ -133,6 +139,10 @@ function login() {
         }
         getToken(admLogin)
     }
+}
+
+function logout() {
+    sessionStorage.clear()
 }
 
 function register() {

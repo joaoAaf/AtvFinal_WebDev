@@ -1,4 +1,4 @@
-Trabalho em Equipe da disciplina da faculdade N695 - Desenvolvimento Plataforma WEB
+Trabalho em Equipe da disciplina da faculdade N695 - Desenvolvimento Plataforma WEB -
 
 Construir aplicação WEB, que contenha as seguintes páginas:
 - Apresentação do Tema (Landing Page);
